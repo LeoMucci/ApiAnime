@@ -12,31 +12,38 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const banco = new Sequelize(config.development);
 
-const Anime = require('./Models/Anime')(banco, Sequelize);
+// const Anime = require('./Models/Anime')(banco, Sequelize);
 
 banco.sync().then(() => {
     console.log("Modelo sincronizado com o banco de dados.")
 });
 
 
-app.get('/aanime', async (req, res) => {
-    const anime = await Anime.findAll();
-    res.json(anime);
-});
+const animes = require("./scr/animes/animes.json")
 
-app.get('/aanime/:id', async (req, res) => {
+app.get("/animes", (req,res) => {
+    return res.json(animes)
+})
+
+
+// app.get('/anime', async (req, res) => {
+//     const anime = await Anime.findAll();
+//     res.json(anime);
+// });
+
+app.get('/anime/:id', async (req, res) => {
     const {id} = req.params;
     const anime = await Anime.findByPk(id)
     res.json(anime);
 });
 
-app.post('/aanime', async (req, res) => {
+app.post('/anime', async (req, res) => {
     const {nome, capa, estudio, status, descricao} = req.body;
     const anime = await Anime.create({nome, capa, estudio, status, descricao});
     res.json(anime);
 });
 
-app.put('/aanime/:id', async (req, res) => {
+app.put('/anime/:id', async (req, res) => {
     const {id} = req.params;
     const {nome, capa, estudio, status, descricao} = req.body;
     
@@ -46,7 +53,7 @@ app.put('/aanime/:id', async (req, res) => {
     res.json(anime);
 });
 
-app.delete('/aanime/:id', async (req, res) => {
+app.delete('/anime/:id', async (req, res) => {
     const {id} = req.params;
 
     await Anime.destroy({where: {id} });
