@@ -30,5 +30,5 @@ module.exports = (sequelize, DataTypes) => {
         version: 'versao'
     }
     );
-    return Jogo;
+    return Anime;
 };
