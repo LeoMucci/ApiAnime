@@ -19,24 +19,24 @@ banco.sync().then(() => {
 });
 
 
-app.get('/anime', async (req, res) => {
+app.get('/aanime', async (req, res) => {
     const anime = await Anime.findAll();
     res.json(anime);
 });
 
-app.get('/anime/:id', async (req, res) => {
+app.get('/aanime/:id', async (req, res) => {
     const {id} = req.params;
     const anime = await Anime.findByPk(id)
     res.json(anime);
 });
 
-app.post('/anime', async (req, res) => {
+app.post('/aanime', async (req, res) => {
     const {nome, capa, estudio, status, descricao} = req.body;
     const anime = await Anime.create({nome, capa, estudio, status, descricao});
     res.json(anime);
 });
 
-app.put('/anime/:id', async (req, res) => {
+app.put('/aanime/:id', async (req, res) => {
     const {id} = req.params;
     const {nome, capa, estudio, status, descricao} = req.body;
     
@@ -46,7 +46,7 @@ app.put('/anime/:id', async (req, res) => {
     res.json(anime);
 });
 
-app.delete('/anime/:id', async (req, res) => {
+app.delete('/aanime/:id', async (req, res) => {
     const {id} = req.params;
 
     await Anime.destroy({where: {id} });
