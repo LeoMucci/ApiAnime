@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { Sequelize } = require('sequelize');
 const config = require('./config');
-const Anime = require('./Models/Anime');
+
 
 const app = express();
 const port = 80;
