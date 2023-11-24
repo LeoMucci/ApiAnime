@@ -12,24 +12,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const banco = new Sequelize(config.development);
 
-// const Anime = require('./Models/Anime')(banco, Sequelize);
+const Anime = require('./Models/Anime')(banco, Sequelize);
 
 banco.sync().then(() => {
     console.log("Modelo sincronizado com o banco de dados.")
 });
 
 
-const animes = require("./scr/animes/animes.json")
-
-app.get("/animes", (req,res) => {
-    return res.json(animes)
-})
-
-
-// app.get('/anime', async (req, res) => {
-//     const anime = await Anime.findAll();
-//     res.json(anime);
-// });
+app.get('/anime', async (req, res) => {
+    const anime = await Anime.findAll();
+    res.json(anime);
+});
 
 app.get('/anime/:id', async (req, res) => {
     const {id} = req.params;
